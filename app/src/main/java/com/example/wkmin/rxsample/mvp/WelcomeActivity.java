@@ -26,7 +26,6 @@ public class WelcomeActivity extends AppCompatActivity implements WelcomeContrac
     @Override
     public void setPresenter(WelcomeContract.Presenter presenter) {
         this.presenter = presenter;
-
     }
 
     @Override

@@ -8,7 +8,8 @@ import com.google.gson.annotations.SerializedName;
  * GitHubModel
  */
 
-public class GitHubModel {
+@SuppressWarnings("unused")
+class GitHubModel {
 
     @SerializedName("login")
     @Expose
