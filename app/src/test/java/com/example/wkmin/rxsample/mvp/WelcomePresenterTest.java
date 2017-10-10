@@ -48,7 +48,6 @@ public class WelcomePresenterTest {
 
     @Test
     public void testRetrofitLoad() throws Exception {
-
         GitHubModel gitHubModel = new GitHubModel();
         gitHubModel.setUrl("sampleUrl");
 

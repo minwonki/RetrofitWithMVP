@@ -24,7 +24,6 @@ class WelcomePresenter implements WelcomeContract.Presenter {
 
     @Override
     public void load() {
-
         Observable<GitHubModel> gitHubModel = service.getGitHubUser("minwonki");
         System.out.println("subscribeOn");
         System.out.println("model -> " + gitHubModel);
@@ -56,5 +55,4 @@ class WelcomePresenter implements WelcomeContract.Presenter {
                     }
                 });
     }
-
 }
