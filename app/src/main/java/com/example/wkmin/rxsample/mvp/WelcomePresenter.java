@@ -1,8 +1,5 @@
 package com.example.wkmin.rxsample.mvp;
 
-
-import android.util.Log;
-
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -29,30 +26,33 @@ class WelcomePresenter implements WelcomeContract.Presenter {
     public void load() {
 
         Observable<GitHubModel> gitHubModel = service.getGitHubUser("minwonki");
-        Log.d("Output", "subscribeOn");
+        System.out.println("subscribeOn");
+        System.out.println("model -> " + gitHubModel);
         gitHubModel.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<GitHubModel>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        Log.d("Output", "onSubscribe");
+                        System.out.println("onSubscribe");
                     }
 
                     @Override
                     public void onNext(@NonNull GitHubModel gitHubModel) {
-                        Log.d("Output", "onNext");
-                        Log.d("Output", gitHubModel.getUrl());
+                        System.out.println("onNext");
+                        System.out.println("model -> " + gitHubModel);
+                        System.out.println("model url -> " + gitHubModel.getUrl());
+
                         view.showMessage(gitHubModel);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.d("Output", "onError:"+e);
+                        System.out.println("onError");
                     }
 
                     @Override
                     public void onComplete() {
-                        Log.d("Output", "onComplete");
+                        System.out.println("onComplete");
                     }
                 });
     }
