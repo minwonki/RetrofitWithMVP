@@ -4,6 +4,7 @@ import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
@@ -16,10 +17,17 @@ class WelcomePresenter implements WelcomeContract.Presenter {
     private WelcomeContract.View view;
     private GitHubService service;
 
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+
     WelcomePresenter(WelcomeContract.View view, GitHubService service) {
         this.view = view;
         this.service = service;
         this.view.setPresenter(this);
+    }
+
+    @Override
+    public void finish() {
+        compositeDisposable.clear();
     }
 
     @Override
@@ -33,6 +41,7 @@ class WelcomePresenter implements WelcomeContract.Presenter {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
                         System.out.println("onSubscribe");
+                        compositeDisposable.add(d);
                     }
 
                     @Override

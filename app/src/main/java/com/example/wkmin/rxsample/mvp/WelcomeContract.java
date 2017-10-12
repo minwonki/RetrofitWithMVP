@@ -16,5 +16,7 @@ interface WelcomeContract {
 
     interface Presenter extends BasePresenter {
         void load();
+
+        void finish();
     }
 }

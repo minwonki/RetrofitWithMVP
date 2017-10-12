@@ -9,11 +9,20 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by wk.min on 29/09/2017.
- * DefaultRetrofit
+ * RetrofitImpl
  */
 
-class DefaultRetrofit {
-    Retrofit invoke() {
+class RetrofitImpl {
+    private static Retrofit INSTANCE;
+
+    static Retrofit getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = invoke();
+        }
+        return INSTANCE;
+    }
+
+    private static Retrofit invoke() {
         return new Retrofit.Builder()
                 .client(new OkHttpClient())
                 .baseUrl("https://api.github.com/")

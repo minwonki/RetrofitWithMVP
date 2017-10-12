@@ -19,8 +19,14 @@ public class WelcomeActivity extends AppCompatActivity implements WelcomeContrac
         this.presenter.load();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        this.presenter.finish();
+    }
+
     private void setMVP() {
-        new WelcomePresenter(this, new DefaultRetrofit().invoke().create(GitHubService.class));
+        new WelcomePresenter(this, RetrofitImpl.getInstance().create(GitHubService.class));
     }
 
     @Override
