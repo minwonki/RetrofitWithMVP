@@ -8,6 +8,7 @@ import org.mockito.MockitoAnnotations;
 
 import io.reactivex.Observable;
 import io.reactivex.android.plugins.RxAndroidPlugins;
+import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.schedulers.Schedulers;
 
 import static org.mockito.Mockito.verify;
@@ -32,11 +33,13 @@ public class WelcomePresenterTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         this.presenter = new WelcomePresenter(view, gitHubService);
+        RxJavaPlugins.setIoSchedulerHandler(scheduler -> Schedulers.trampoline());
         RxAndroidPlugins.setInitMainThreadSchedulerHandler(scheduler -> Schedulers.trampoline());
     }
 
     @After
     public void tearDown() throws Exception {
+        RxJavaPlugins.reset();
         RxAndroidPlugins.reset();
     }
 
